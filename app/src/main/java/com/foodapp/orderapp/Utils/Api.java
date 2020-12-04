@@ -11,6 +11,7 @@ public class Api {
 
     public static  String Login=        BaseUrl+"userLogin";
     public static  String userRegistration  =BaseUrl+"userRegistration";
+    public static  String mainCategoryList     =BaseUrl+"mainCategoryList";
     public static  String categoryList     =BaseUrl+"categoryList";
     public static  String homeBannerList      =BaseUrl+"homeBannerList";
     public static  String subCategoriesList      =BaseUrl+"subCategoriesList";
@@ -33,4 +34,6 @@ public class Api {
     public static String registrationWithOtp=BaseUrl+"registrationWithOtp";
     public static String verifyRegistrationOtp=BaseUrl+"verifyRegistrationOtp";
     public static String trendingList=BaseUrl+"trendingList";
+    public static  String Enquiry      =BaseUrl+"productEnquiry";
+
 }

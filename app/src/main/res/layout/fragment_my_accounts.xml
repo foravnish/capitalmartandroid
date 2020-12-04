@@ -5,133 +5,137 @@
     tools:context="com.foodapp.orderapp.Fragments.MyAccounts">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="4">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="4">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view"
-                android:layout_width="fill_parent"
-                android:layout_height="120dp"
-                android:layout_weight="1"
-                android:layout_gravity="top"
-                android:layout_margin="5dp">
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dp60"
+            android:layout_gravity="top"
+            android:layout_margin="5dp"
+            android:layout_weight="1">
 
-                <LinearLayout
-                    android:id="@+id/account"
+            <LinearLayout
+                android:id="@+id/account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:layout_marginLeft="@dimen/dp10"
+                android:orientation="horizontal">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:orientation="horizontal">
-
-                            <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Accounts Details"
-                            android:textSize="22dp"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:drawablePadding="10dp"
-                                android:drawableTint="@color/amazon_light"
-                                android:drawableLeft="@drawable/acounts"
-                                android:textColor="@color/colorAccent"
-                            android:textStyle="bold"/>
+                    android:drawableLeft="@drawable/acounts"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/amazon_light"
+                    android:gravity="center"
+                    android:text="Accounts Details"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="22dp"
+                    android:textStyle="bold" />
 
 
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
 
-            <android.support.v7.widget.CardView
-                android:layout_width="fill_parent"
-                android:layout_height="120dp"
-                android:layout_gravity="top"
-                android:layout_weight="1"
-                android:layout_margin="5dp">
+        <android.support.v7.widget.CardView
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dp60"
+            android:layout_gravity="top"
+            android:layout_margin="5dp"
+            android:layout_weight="1">
 
 
-                <LinearLayout
-                    android:id="@+id/terms"
+            <LinearLayout
+                android:id="@+id/terms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:layout_marginLeft="@dimen/dp10"
+                android:orientation="horizontal">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Terms &amp; Conditions "
-                        android:textSize="22dp"
-                        android:drawablePadding="10dp"
-                        android:drawableTint="@color/amazon_light"
-                        android:drawableLeft="@drawable/terms"
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="bold"/>
+                    android:drawableLeft="@drawable/terms"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/amazon_light"
+                    android:text="Terms &amp; Conditions "
+                    android:textColor="@color/colorAccent"
+                    android:textSize="22dp"
+                    android:textStyle="bold" />
 
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:layout_width="fill_parent"
-                android:layout_height="120dp"
-                android:layout_gravity="top"
-                android:layout_weight="1"
-                android:layout_margin="5dp">
+        <android.support.v7.widget.CardView
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dp60"
+            android:layout_gravity="top"
+            android:layout_margin="5dp"
+            android:layout_weight="1">
 
-                <LinearLayout
-                    android:id="@+id/contact"
+            <LinearLayout
+                android:id="@+id/contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:layout_marginLeft="@dimen/dp10"
+                android:orientation="horizontal">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Contact Us"
-                        android:textSize="22dp"
-                        android:drawableTint="@color/amazon_light"
-                        android:drawablePadding="10dp"
-                        android:drawableLeft="@drawable/contat"
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="bold"/>
+                    android:drawableLeft="@drawable/contat"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/amazon_light"
+                    android:text="Contact Us"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="22dp"
+                    android:textStyle="bold" />
 
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:layout_width="fill_parent"
-                android:layout_height="120dp"
-                android:layout_gravity="top"
-                android:layout_weight="1"
-                android:layout_margin="5dp">
+        <android.support.v7.widget.CardView
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dp60"
+            android:layout_gravity="top"
+            android:layout_margin="5dp"
+            android:layout_weight="1">
 
 
-                <LinearLayout
-                   android:id="@+id/about"
+            <LinearLayout
+                android:id="@+id/about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:layout_marginLeft="@dimen/dp10"
+                android:orientation="horizontal">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="About Us"
-                        android:textSize="22dp"
-                        android:drawableTint="@color/amazon_light"
-                        android:drawablePadding="10dp"
-                        android:drawableLeft="@drawable/about"
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="bold"/>
+                    android:drawableLeft="@drawable/about"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/amazon_light"
+                    android:text="About Us"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="22dp"
+                    android:textStyle="bold" />
 
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
 
-        </LinearLayout>
-
-    
-
+    </LinearLayout>
 
 
 </LinearLayout>

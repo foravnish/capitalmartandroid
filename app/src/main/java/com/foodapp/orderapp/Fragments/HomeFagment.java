@@ -226,7 +226,7 @@ public class HomeFagment extends Fragment  {
 
 
 
-        JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, Api.categoryList, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, Api.mainCategoryList, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -264,7 +264,7 @@ public class HomeFagment extends Fragment  {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Fragment fragment=new SubCatagoryFragment();
+                Fragment fragment=new SecondLevelCatagoryFragment();
                 FragmentManager manager=getFragmentManager();
                 FragmentTransaction ft=manager.beginTransaction();
                 ft.setCustomAnimations(R.anim.frag_fadein, R.anim.frag_fadeout,R.anim.frag_fade_right, R.anim.frag_fad_left);
@@ -367,13 +367,12 @@ public class HomeFagment extends Fragment  {
 
     public void onPause(){
         super.onPause();
-        /*if(handler!=null)
-            handler.removeCallbacks(runnale);*/
+        if(handler!=null)
+            handler.removeCallbacks(runnale);
     }
     public void onResume(){
         super.onResume();
-        // Start auto screen slideshow after 1s
-        /*handler.postDelayed(runnale, PERIOD_MS);*/
+        handler.postDelayed(runnale, PERIOD_MS);
     }
 
 

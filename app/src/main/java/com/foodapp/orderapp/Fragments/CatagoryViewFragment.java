@@ -23,12 +23,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.StringRequest;
 import com.foodapp.orderapp.Activity.Login;
 import com.foodapp.orderapp.Activity.Navigation;
 import com.foodapp.orderapp.R;
@@ -41,12 +44,15 @@ import com.jsibbold.zoomage.ZoomageView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -68,13 +74,15 @@ public class CatagoryViewFragment extends Fragment {
     JSONObject jsonObject1;
     List<Getseter> Catag = new ArrayList<Getseter>();
     boolean flag = false;
-
+    String productId;
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cat_view, container, false);
         parallax_header_imageview = (NetworkImageView) view.findViewById(R.id.parallax_header_imageview);
+
+        productId=getArguments().getString("product_id");
 
         mrp = (TextView) view.findViewById(R.id.mrp);
         disount = (TextView) view.findViewById(R.id.disount);
@@ -132,12 +140,6 @@ public class CatagoryViewFragment extends Fragment {
             }
         });
 
-        btnNumber.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
 
         dialog = new Dialog(getActivity());
@@ -150,7 +152,6 @@ public class CatagoryViewFragment extends Fragment {
         Getseter.showdialog(dialog);
 
 
-//        JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, "http://hoomiehome.com/appcredentials/jsondata.php?getProductDetails=1&product_id="+getArguments().getString("product_id"), null, new Response.Listener<JSONObject>() {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Api.productDetails + "?productId=" + getArguments().getString("product_id"), null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -200,68 +201,140 @@ public class CatagoryViewFragment extends Fragment {
         });
         AppController.getInstance().addToRequestQueue(jsonObjectRequest);
 
-//        button1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//                if (MyPrefrences.getUserLogin(getActivity())==false){
-//                    popForLogin();
-//
-//                }else {
-//                    if (!Getseter.preferences.getString("fname", "").toString().equals("") &&
-//                            //   !Getseter.preferences.getString("lname","").toString().equals("") &&
-//                            !Getseter.preferences.getString("house_no", "").toString().equals("") &&
-//                            !Getseter.preferences.getString("street", "").toString().equals("") &&
-//                            // !Getseter.preferences.getString("area","").toString().equals("") &&
-//                            !Getseter.preferences.getString("pincode", "").toString().equals("") &&
-//                            !Getseter.preferences.getString("city_name", "").toString().equals("") &&
-//                            !Getseter.preferences.getString("mobile", "").toString().equals("")) {
-//
-//
-//                        if (Getseter.preferences.getString("pincode", "").equals("141001") ||
-//                                Getseter.preferences.getString("pincode", "").equals("141002") ||
-//                                Getseter.preferences.getString("pincode", "").equals("141003") ||
-//                                Getseter.preferences.getString("pincode", "").equals("141004") ||
-//                                Getseter.preferences.getString("pincode", "").equals("141005") ||
-//                                Getseter.preferences.getString("pincode", "").equals("141006") ||
-//                                Getseter.preferences.getString("pincode", "").equals("141007") ||
-//                                Getseter.preferences.getString("pincode", "").equals("141008")) {
-//
-//
-//                            continueCart();
-//
-//                        } else {
-//
-//                            if (jsonObject.optString("product_name").contains("Dry") || jsonObject.optString("product_name").contains("Giftpack")) {
-//                                Toast.makeText(getActivity(), "Sorry! this product not available on this pincode.", Toast.LENGTH_LONG).show();
-//                            } else {
-//                                continueCart();
-//                            }
-//                        }
-//
-//
-//                    } else {
-//                        Fragment fragment = new UpdateProfile();
-//                        FragmentManager manager = getFragmentManager();
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("type", "none");
-//                        bundle.putString("orderitem", "");
-//                        bundle.putString("cal_price", "");
-//                        bundle.putString("totalItem", "");
-//                        bundle.putInt("length", 0);
-//                        FragmentTransaction ft = manager.beginTransaction();
-//                        fragment.setArguments(bundle);
-//                        ft.setCustomAnimations(R.anim.frag_fadein, R.anim.frag_fadeout, R.anim.frag_fade_right, R.anim.frag_fad_left);
-//                        ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
-//
-//                    }
-//                }
-//            }
-//        });
+        btnNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callApiForEnquiry();
+            }
+        });
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (MyPrefrences.getUserLogin(getActivity())==false){
+                    popForLogin();
+
+                }else {
+                    if (!Getseter.preferences.getString("fname", "").toString().equals("") &&
+                            //   !Getseter.preferences.getString("lname","").toString().equals("") &&
+                            !Getseter.preferences.getString("house_no", "").toString().equals("") &&
+                            !Getseter.preferences.getString("street", "").toString().equals("") &&
+                            // !Getseter.preferences.getString("area","").toString().equals("") &&
+                            !Getseter.preferences.getString("pincode", "").toString().equals("") &&
+                            !Getseter.preferences.getString("city_name", "").toString().equals("") &&
+                            !Getseter.preferences.getString("mobile", "").toString().equals("")) {
+
+                        if (Getseter.preferences.getString("pincode", "").equals("141001") ||
+                                Getseter.preferences.getString("pincode", "").equals("141002") ||
+                                Getseter.preferences.getString("pincode", "").equals("141003") ||
+                                Getseter.preferences.getString("pincode", "").equals("141004") ||
+                                Getseter.preferences.getString("pincode", "").equals("141005") ||
+                                Getseter.preferences.getString("pincode", "").equals("141006") ||
+                                Getseter.preferences.getString("pincode", "").equals("141007") ||
+                                Getseter.preferences.getString("pincode", "").equals("141008")) {
+
+
+                            continueCart();
+
+                        } else {
+
+                            if (jsonObject.optString("product_name").contains("Dry") || jsonObject.optString("product_name").contains("Giftpack")) {
+                                Toast.makeText(getActivity(), "Sorry! this product not available on this pincode.", Toast.LENGTH_LONG).show();
+                            } else {
+                                continueCart();
+                            }
+                        }
+
+
+                    } else {
+                        Fragment fragment = new UpdateProfile();
+                        FragmentManager manager = getFragmentManager();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("type", "none");
+                        bundle.putString("orderitem", "");
+                        bundle.putString("cal_price", "");
+                        bundle.putString("totalItem", "");
+                        bundle.putInt("length", 0);
+                        FragmentTransaction ft = manager.beginTransaction();
+                        fragment.setArguments(bundle);
+                        ft.setCustomAnimations(R.anim.frag_fadein, R.anim.frag_fadeout, R.anim.frag_fade_right, R.anim.frag_fad_left);
+                        ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+
+                    }
+                }
+            }
+        });
 
 
         return view;
+    }
+
+    private void callApiForEnquiry() {
+        Getseter.showdialog(dialog);
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, Api.Enquiry, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Getseter.exitdialog(dialog);
+
+                JSONObject jsonObject;
+                Log.d("Okhttp","Enquiry"+response);
+
+                try {
+                    jsonObject = new JSONObject(response);
+
+                    if (jsonObject.optString("status").equals("success")) {
+
+                        Getseter.exitdialog(dialog);
+                        Toast.makeText(getActivity(), jsonObject.optString("message").toString(), Toast.LENGTH_LONG).show();
+
+                    }
+                    else {
+                        Getseter.exitdialog(dialog);
+                        Toast.makeText(getActivity(), jsonObject.optString("message").toString(), Toast.LENGTH_LONG).show();
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Please connect to the internet.", Toast.LENGTH_SHORT).show();
+                Getseter.exitdialog(dialog);
+
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+
+                //  params.put("change_pass", "1");
+                params.put("user_id", Getseter.preferences.getString("user_id",""));
+                params.put("product_id", productId);
+                params.put("product_qty", integer_number.getText().toString());
+                params.put("message", "");
+
+                return params;
+            }
+        };
+
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppController.getInstance().addToRequestQueue(stringRequest);
+
+
     }
 
     private void continueCart() {

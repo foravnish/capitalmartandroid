@@ -12,11 +12,19 @@
         android:horizontalSpacing="10dp"
         android:verticalSpacing="5dp"
         android:numColumns="2"
-
+        android:visibility="visible"
         android:padding="10dp">
 
     </GridView>
 
+    <ImageView
+        android:id="@+id/NoRecordFound"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/no_record_found"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        />
     <!--<ScrollView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content">-->

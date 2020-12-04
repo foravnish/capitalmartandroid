@@ -34,7 +34,7 @@ import java.util.Map;
 public class SignnUp extends AppCompatActivity {
 
     Button signup;
-    EditText re_password,password,mobile,email,name,gst,company;
+    EditText re_password,password,mobile,email,name,gst,company,txtCity;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     Dialog dialog;
     JSONObject jsonObject ;
@@ -52,7 +52,7 @@ public class SignnUp extends AppCompatActivity {
         re_password=(EditText)findViewById(R.id.re_password);
         gst=(EditText)findViewById(R.id.txtGst);
         company=(EditText)findViewById(R.id.txtCompany);
-
+        txtCity=(EditText)findViewById(R.id.txtCity);
         signup=(Button)findViewById(R.id.signup);
         txtTerms=(TextView)findViewById(R.id.txtTerms);
         dialog=new Dialog(SignnUp.this);
@@ -201,6 +201,7 @@ public class SignnUp extends AppCompatActivity {
                 params.put("password", password.getText().toString());
                 params.put("gst", gst.getText().toString());
                 params.put("company", company.getText().toString());
+                params.put("company", txtCity.getText().toString());
 
 
                 return params;
