@@ -3,39 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/splas"
     android:orientation="vertical"
     tools:context="com.foodapp.orderapp.Activity.MainActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp100"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginRight="40dp"
-        android:src="@drawable/csm_logo"/>
+<!--    <ImageView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="@dimen/dp100"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:layout_marginLeft="40dp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginRight="40dp"-->
+<!--        android:src="@drawable/csm_logo"/>-->
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp100"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/capital_logo"/>
+<!--    <ImageView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="@dimen/dp100"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:layout_marginLeft="40dp"-->
+<!--        android:layout_marginRight="40dp"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:src="@drawable/capital_logo"/>-->
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp100"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp30"
-        android:src="@drawable/data_print_logo"/>
+<!--    <ImageView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="@dimen/dp100"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:layout_marginLeft="40dp"-->
+<!--        android:layout_marginRight="40dp"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginBottom="@dimen/dp30"-->
+<!--        android:src="@drawable/data_print_logo"/>-->
 
 </RelativeLayout>

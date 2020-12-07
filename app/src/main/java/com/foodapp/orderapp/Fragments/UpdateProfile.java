@@ -75,7 +75,7 @@ public class UpdateProfile extends Fragment {
 //        phone=(EditText)view.findViewById(R.id.phone);
         submit = (Button) view.findViewById(R.id.submit);
 
-        getActivity().setTitle("Update Profile");
+        getActivity().setTitle("Profile");
 
 
         dialog = new Dialog(getActivity());

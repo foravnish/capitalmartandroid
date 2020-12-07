@@ -27,7 +27,7 @@ import com.foodapp.orderapp.Fragments.HomeFagment;
 import com.foodapp.orderapp.Fragments.MyAccounts;
 import com.foodapp.orderapp.Fragments.ReferAFriend;
 import com.foodapp.orderapp.Fragments.SearchFragment;
-import com.foodapp.orderapp.Fragments.UpdateProfile;
+import com.foodapp.orderapp.Fragments.ViewProfile;
 import com.foodapp.orderapp.R;
 import com.foodapp.orderapp.Utils.DatabaseHandler;
 import com.foodapp.orderapp.Utils.Getseter;
@@ -35,6 +35,7 @@ import com.foodapp.orderapp.Utils.MyPrefrences;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 public class Navigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -105,7 +106,7 @@ public class Navigation extends AppCompatActivity
             MenuItem nav_login = menu.findItem(R.id.logout);
             nav_login.setTitle("Login");
         }
-        this.setTitle("Capital Mart");
+        this.setTitle(""+ MyPrefrences.getUSENAME(getApplicationContext()));
 
 
 
@@ -126,7 +127,7 @@ public class Navigation extends AppCompatActivity
                     popForLogin();
                 }
                 else {
-                    fragment=new UpdateProfile();
+                    fragment=new ViewProfile();
                     FragmentManager fm=getSupportFragmentManager();
                     Bundle bundle=new Bundle();
                     bundle.putString("type","none");
@@ -172,7 +173,7 @@ public class Navigation extends AppCompatActivity
                 });
         AlertDialog alert = builder.create();
         //Setting the title manually
-        alert.setTitle("Capital Mart");
+        alert.setTitle(""+MyPrefrences.getUSENAME(getApplicationContext()));
         alert.show();
     }
 

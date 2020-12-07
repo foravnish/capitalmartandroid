@@ -171,7 +171,7 @@ public class CartFragment extends Fragment {
                 });
         AlertDialog alert = builder.create();
         //Setting the title manually
-        alert.setTitle("Capital Mart");
+        alert.setTitle(""+MyPrefrences.getUSENAME(getActivity()));
         alert.show();
     }
 

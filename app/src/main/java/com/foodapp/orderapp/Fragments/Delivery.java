@@ -213,7 +213,7 @@ public class Delivery extends Fragment {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment=new UpdateProfile();
+                Fragment fragment=new ViewProfile();
                 FragmentManager manager=getFragmentManager();
                 Bundle bundle=new Bundle();
                 bundle.putString("type","prod");
@@ -447,7 +447,7 @@ public class Delivery extends Fragment {
 
         }
         else{
-            Fragment fragment=new UpdateProfile();
+            Fragment fragment=new ViewProfile();
             FragmentManager manager=getFragmentManager();
             Bundle bundle=new Bundle();
             bundle.putString("type","prod");

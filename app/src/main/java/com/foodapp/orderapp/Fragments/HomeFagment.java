@@ -45,6 +45,7 @@ import com.foodapp.orderapp.Utils.Api;
 import com.foodapp.orderapp.Utils.AppController;
 import com.foodapp.orderapp.Utils.DatabaseHandler;
 import com.foodapp.orderapp.Utils.Getseter;
+import com.foodapp.orderapp.Utils.MyPrefrences;
 import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerTextView;
 
@@ -121,7 +122,7 @@ public class HomeFagment extends Fragment  {
         AllProducts = new ArrayList<>();
 
 
-        getActivity().setTitle("Capital Mart");
+        getActivity().setTitle(""+ MyPrefrences.getUSENAME(getActivity()));
 
 
         position=0;

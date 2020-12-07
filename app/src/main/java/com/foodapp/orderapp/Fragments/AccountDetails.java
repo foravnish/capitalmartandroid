@@ -108,7 +108,7 @@ public class AccountDetails extends Fragment {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment=new UpdateProfile();
+                Fragment fragment=new ViewProfile();
                 FragmentManager manager=getFragmentManager();
                 Bundle bundle=new Bundle();
                 bundle.putString("type","none");

@@ -249,7 +249,7 @@ public class CatagoryViewFragment extends Fragment {
 
 
                     } else {
-                        Fragment fragment = new UpdateProfile();
+                        Fragment fragment = new ViewProfile();
                         FragmentManager manager = getFragmentManager();
                         Bundle bundle = new Bundle();
                         bundle.putString("type", "none");
@@ -386,7 +386,7 @@ public class CatagoryViewFragment extends Fragment {
                 });
         AlertDialog alert = builder.create();
         //Setting the title manually
-        alert.setTitle("Capital Mart");
+        alert.setTitle(""+MyPrefrences.getUSENAME(getActivity()));
         alert.show();
     }
 

@@ -67,20 +67,42 @@
             android:layout_marginLeft="@dimen/dp10">
 
             <TextView
+                android:id="@+id/txt_wellcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Welcome to "
                 android:textColor="@color/white"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp20"
                 android:textSize="@dimen/text_size_16sp"
                 android:textStyle="bold"
                 android:gravity="center"/>
 
             <ImageView
+                android:id="@+id/img_mid"
+                android:layout_width="@dimen/dp100"
+                android:layout_height="@dimen/dp50"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_toRightOf="@+id/txt_wellcome"
+                android:src="@drawable/capital_logo_single"/>
+
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp30"
-                android:src="@drawable/capital_logo"/>
+                android:layout_height="wrap_content"
+                android:text="MART"
+                android:layout_toRightOf="@+id/img_mid"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/dimen_20sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <ImageView
+                android:id="@+id/img_right"
+                android:layout_width="@dimen/dp80"
+                android:layout_height="@dimen/dp50"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/csm_logo"/>
+
         </RelativeLayout>
 
         <View
