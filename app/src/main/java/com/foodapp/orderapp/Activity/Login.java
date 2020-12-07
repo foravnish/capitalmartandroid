@@ -46,6 +46,7 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity  {
 
+    ///Login
     Button login,signup;
     EditText password,email;
     TextView forgotssword,skip;
