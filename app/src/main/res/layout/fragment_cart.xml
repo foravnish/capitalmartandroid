@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,53 +7,113 @@
     android:weightSum="10"
     tools:context="com.foodapp.orderapp.Fragments.HomeFagment">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/amazon"
+        app:title="Cart"
+        android:theme="@style/AppTheme.ActionBar"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:titleTextColor="@color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@color/white"
+        android:paddingTop="@dimen/dp10"
+        android:paddingBottom="@dimen/dp5">
+
+        <TextView
+            android:id="@+id/txt_wellcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp10"
+            android:gravity="center"
+            android:text="Welcome to "
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_mid"
+            android:layout_width="@dimen/dp100"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_toRightOf="@+id/txt_wellcome"
+            android:src="@drawable/capital_logo_single" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/img_mid"
+            android:gravity="center"
+            android:text="MART"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_right"
+            android:layout_width="@dimen/dp80"
+            android:layout_height="@dimen/dp50"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/csm_logo" />
+
+    </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My Cart"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold"
-        android:textSize="18dp"/>
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="My Cart"
+            android:textColor="@color/colorAccent"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/remove"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/delete"
-            android:backgroundTint="@color/amazon_light"
+            android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"/>
+            android:background="@drawable/delete"
+            android:backgroundTint="@color/amazon_light" />
     </RelativeLayout>
+
     <GridView
         android:id="@+id/gridview"
-        android:layout_weight="8"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="8">
 
     </GridView>
 
     <Button
         android:id="@+id/checkout"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="40dp"
         android:layout_weight="1"
-    android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:text="Checkout Now"
-    android:layout_alignParentBottom="true"
-    android:background="@drawable/strock4"
-    android:textSize="22dp"
-    android:textColor="#fff"
-    android:layout_marginTop="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:gravity="center"
-    android:layout_marginBottom="20dp"
-    android:layout_gravity="bottom"/>
+        android:background="@drawable/strock4"
+        android:gravity="center"
+        android:text="Checkout Now"
+        android:textColor="#fff"
+        android:textSize="22dp" />
 
 </LinearLayout>
 

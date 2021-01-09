@@ -2,6 +2,7 @@ package com.foodapp.orderapp.Fragments;
 
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -267,17 +268,24 @@ public class UpdateProfile extends Fragment {
 //                                    ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
                                 } else if (getArguments().getString("type").equalsIgnoreCase("prod")) {
 
-                                    Fragment fragment = new Delivery();
-                                    FragmentManager manager = getFragmentManager();
-                                    FragmentTransaction ft = manager.beginTransaction();
-                                    ft.setCustomAnimations(R.anim.frag_fadein, R.anim.frag_fadeout, R.anim.frag_fade_right, R.anim.frag_fad_left);
-                                    ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("orderitem", getArguments().get("orderitem").toString());
-                                    bundle.putString("cal_price", getArguments().get("cal_price").toString());
-                                    bundle.putString("totalItem", getArguments().get("totalItem").toString());
-                                    bundle.putInt("length", getArguments().getInt("length"));
-                                    fragment.setArguments(bundle);
+//                                    Fragment fragment = new Delivery();
+//                                    FragmentManager manager = getFragmentManager();
+//                                    FragmentTransaction ft = manager.beginTransaction();
+//                                    ft.setCustomAnimations(R.anim.frag_fadein, R.anim.frag_fadeout, R.anim.frag_fade_right, R.anim.frag_fad_left);
+//                                    ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+//                                    Bundle bundle = new Bundle();
+//                                    bundle.putString("orderitem", getArguments().get("orderitem").toString());
+//                                    bundle.putString("cal_price", getArguments().get("cal_price").toString());
+//                                    bundle.putString("totalItem", getArguments().get("totalItem").toString());
+//                                    bundle.putInt("length", getArguments().getInt("length"));
+//                                    fragment.setArguments(bundle);
+
+                                    Intent intent = new Intent(getActivity(), Delivery.class);
+                                    intent.putExtra("orderitem", getArguments().get("orderitem").toString());
+                                    intent.putExtra("cal_price", getArguments().get("cal_price").toString());
+                                    intent.putExtra("totalItem", getArguments().get("totalItem").toString());
+                                    intent.putExtra("length",""+getArguments().getInt("length"));
+                                    startActivity(intent);
 
                                 }
                             } else {

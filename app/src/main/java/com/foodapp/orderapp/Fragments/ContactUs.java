@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,7 +89,7 @@ public class ContactUs extends Fragment {
 
 
                         address.setText(jsonObject.optString("contact_address"));
-                        number.setText(jsonObject.optString("contactno"));
+                        number.setText(Html.fromHtml("<u>"+jsonObject.optString("contactno")+"</u>"));
                         fax.setText(jsonObject.optString("fax"));
                         email.setText(jsonObject.optString("email"));
                         Log.d("fsdfsdfsdfgsd",jsonObject.optString("contactno"));

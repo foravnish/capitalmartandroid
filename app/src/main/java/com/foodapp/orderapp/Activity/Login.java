@@ -215,6 +215,10 @@ public class Login extends AppCompatActivity  {
                             MyPrefrences.setEMAILID(getApplicationContext(),jsonObject1.optString("email"));
                             MyPrefrences.setMobile(getApplicationContext(),jsonObject1.optString("mobile"));
                             MyPrefrences.setMyRefrel(getApplicationContext(),jsonObject1.optString("referer"));
+                            MyPrefrences.setGST(getApplicationContext(),jsonObject1.optString("gst"));
+                            MyPrefrences.setCompanyName(getApplicationContext(),jsonObject1.optString("company"));
+                            MyPrefrences.setCityName(getApplicationContext(),jsonObject1.optString("city_id"));
+
                             Getseter.editor.commit();
                         }
                     startActivity(new Intent(Login.this,Navigation.class));

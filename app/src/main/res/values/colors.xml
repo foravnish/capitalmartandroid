@@ -11,6 +11,8 @@
 
     <color name="gray_dark">#434343</color>
     <color name="red">#d4020b</color>
+    <color name="red_full">#FF0000</color>
+
     <color name="amazon">#d01b11</color>
     <color name="amazon_light">#4b4a4a</color>
     <color name="app_color">#d01b11</color>

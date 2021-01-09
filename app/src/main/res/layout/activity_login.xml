@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/login_img"
     android:orientation="vertical"
     tools:context="com.foodapp.orderapp.Activity.MainActivity">
 
@@ -16,11 +16,11 @@
         <ImageView
             android:id="@+id/logo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp200"
             android:layout_marginLeft="80dp"
             android:layout_marginRight="80dp"
-            android:layout_marginTop="50dp"
-            android:src="@drawable/capital_logo" />
+            android:layout_marginTop="70dp"
+            android:src="@drawable/csm_logo" />
 
     </LinearLayout>
 

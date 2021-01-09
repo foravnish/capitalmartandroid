@@ -31,7 +31,7 @@
             <!--android:fillViewport="true"-->
             <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/linear_layout_android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -45,79 +45,115 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text=""
+                    android:textSize="@dimen/text_size_22sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/mrp"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/name"
-                    android:text="" />
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/selling1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/disount"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="₹ "
+                            android:textSize="@dimen/dimen_26dp"
+                            android:textColor="@color/colorAccent"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/selling"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" 200"
+                            android:textSize="@dimen/dimen_26dp"
+                            android:textColor="@color/colorAccent"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/mrp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_22sp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:text="mrp" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/disount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/mrp"
                     android:background="#fb0"
                     android:paddingLeft="5dp"
+                    android:visibility="gone"
                     android:paddingRight="5dp"
                     android:text=""
                     android:textColor="#fff" />
 
-                <LinearLayout
-                    android:id="@+id/selling1"
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/disount"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="₹ "
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/selling"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                    android:layout_height="0.5dp"
+                    android:layout_below="@+id/size"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:background="@color/top_gray_light"/>
 
                 <TextView
                     android:id="@+id/size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/selling1"
+                    android:visibility="gone"
+                    android:textSize="@dimen/text_size_22sp"
                     android:singleLine="true"
                     android:text="" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/size"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:textSize="@dimen/text_size_18sp"
+                    android:textColor="@color/red_full"
+                    android:textStyle="bold"
+                    android:text="Buy Bulk Save More" />
 
                 <TextView
                     android:id="@+id/desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/size"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:textSize="@dimen/text_size_16sp"
                     android:text="" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/desc"
+                    android:layout_marginTop="@dimen/dp10"
                     android:orientation="vertical">
 
 
                     <LinearLayout
                         android:id="@+id/liner"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_above="@+id/button1"
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="center"
                         android:background="@drawable/strock_qty"
+                        android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -135,17 +171,17 @@
                         <EditText
                             android:id="@+id/integer_number"
                             android:layout_width="@dimen/dp70"
-                            android:layout_height="@dimen/dp50"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="40dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="@dimen/dp5"
                             android:layout_marginRight="40dp"
-                            android:layout_marginBottom="16dp"
+                            android:layout_marginBottom="5dp"
                             android:gravity="center"
                             android:inputType="number"
-                            android:text="1"
+                            android:text="0"
                             android:textSize="30sp"
-                            android:textStyle="bold" />
+                            android:textStyle="normal" />
 
                         <Button
                             android:id="@+id/increase"
@@ -199,7 +235,7 @@
 
 
                 </LinearLayout>
-            </RelativeLayout>
+            </LinearLayout>
 
             <!--</android.support.v4.widget.NestedScrollView>-->
 

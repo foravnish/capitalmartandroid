@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +21,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.foodapp.orderapp.R;
 import com.foodapp.orderapp.Utils.Api;
@@ -25,10 +29,13 @@ import com.foodapp.orderapp.Utils.AppController;
 import com.foodapp.orderapp.Utils.Getseter;
 import com.foodapp.orderapp.Utils.MyPrefrences;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SignnUp extends AppCompatActivity {
@@ -40,6 +47,10 @@ public class SignnUp extends AppCompatActivity {
     JSONObject jsonObject ;
     String refValue;
     TextView txtTerms;
+    ArrayList<Getseter> DataList = new ArrayList<>();
+    List<String> City_Names = new ArrayList<String>();
+    Spinner city;
+    String cityId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +63,10 @@ public class SignnUp extends AppCompatActivity {
         re_password=(EditText)findViewById(R.id.re_password);
         gst=(EditText)findViewById(R.id.txtGst);
         company=(EditText)findViewById(R.id.txtCompany);
-        txtCity=(EditText)findViewById(R.id.txtCity);
+//        txtCity=(EditText)findViewById(R.id.txtCity);
         signup=(Button)findViewById(R.id.signup);
         txtTerms=(TextView)findViewById(R.id.txtTerms);
+        city = (Spinner) findViewById(R.id.city);
         dialog=new Dialog(SignnUp.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -63,6 +75,26 @@ public class SignnUp extends AppCompatActivity {
         Getseter.editor =Getseter.preferences.edit();
 
 //        mobile.setText(getIntent().getStringExtra("mobile"));
+
+
+        getCityList();
+
+        city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("sdfvsdgvfdsgdf", DataList.get(position).getID());
+                cityId=DataList.get(position).getID();
+                Getseter.editor.putString("city_id", DataList.get(position).getID());
+                Getseter.editor.putString("city_name", DataList.get(position).getName());
+                Getseter.editor.commit();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         if (MyPrefrences.getRefer(getApplicationContext()).equals("")){
@@ -141,6 +173,38 @@ public class SignnUp extends AppCompatActivity {
 
     }
 
+    private void getCityList() {
+
+        JsonObjectRequest jsonObjectRequest22 = new JsonObjectRequest(Request.Method.GET, Api.cityList, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Getseter.exitdialog(dialog);
+
+                if (response.optString("status").equalsIgnoreCase("success")) {
+                    JSONArray jsonArray = response.optJSONArray("message");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.optJSONObject(i);
+                        DataList.add(new Getseter(jsonObject.optString("id"), jsonObject.optString("city"), null, null));
+                        City_Names.add(jsonObject.optString("city"));
+                    }
+                    ArrayAdapter<String> adapter_state1 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, City_Names);
+                    adapter_state1.setDropDownViewResource(R.layout.spinnertext);
+                    city.setAdapter(adapter_state1);
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Please connect to the internet.", Toast.LENGTH_SHORT).show();
+                Getseter.exitdialog(dialog);
+            }
+        });
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest22);
+
+    }
+
     private void register() {
 
 
@@ -201,7 +265,7 @@ public class SignnUp extends AppCompatActivity {
                 params.put("password", password.getText().toString());
                 params.put("gst", gst.getText().toString());
                 params.put("company", company.getText().toString());
-                params.put("company", txtCity.getText().toString());
+                params.put("city_id", cityId.toString());
 
 
                 return params;

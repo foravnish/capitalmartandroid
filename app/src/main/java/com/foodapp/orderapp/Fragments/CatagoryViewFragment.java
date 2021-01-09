@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,7 +65,8 @@ public class CatagoryViewFragment extends Fragment {
 
     String image;
     NetworkImageView parallax_header_imageview;
-    TextView mrp, disount, selling, name, desc, integer_number, button1, size,btnNumber;
+    TextView mrp, disount, selling, name, desc, button1, size, btnNumber;
+    EditText integer_number;
     Dialog dialog;
     Button decrease, increase;
     static int number = 1;
@@ -75,6 +77,7 @@ public class CatagoryViewFragment extends Fragment {
     List<Getseter> Catag = new ArrayList<Getseter>();
     boolean flag = false;
     String productId;
+
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,7 +85,7 @@ public class CatagoryViewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cat_view, container, false);
         parallax_header_imageview = (NetworkImageView) view.findViewById(R.id.parallax_header_imageview);
 
-        productId=getArguments().getString("product_id");
+        productId = getArguments().getString("product_id");
 
         mrp = (TextView) view.findViewById(R.id.mrp);
         disount = (TextView) view.findViewById(R.id.disount);
@@ -90,7 +93,7 @@ public class CatagoryViewFragment extends Fragment {
         name = (TextView) view.findViewById(R.id.name);
         desc = (TextView) view.findViewById(R.id.desc);
         size = (TextView) view.findViewById(R.id.size);
-        integer_number = (TextView) view.findViewById(R.id.integer_number);
+        integer_number = (EditText) view.findViewById(R.id.integer_number);
         db = new DatabaseHandler(getActivity());
 //        decrease = (Button) view.findViewById(R.id.decrease);
         increase = (Button) view.findViewById(R.id.increase);
@@ -135,11 +138,10 @@ public class CatagoryViewFragment extends Fragment {
         parallax_header_imageview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showFullImageDialog(getActivity(), jsonObject.optString("photo"),0, "Photo");
+                showFullImageDialog(getActivity(), jsonObject.optString("photo"), 0, "Photo");
 
             }
         });
-
 
 
         dialog = new Dialog(getActivity());
@@ -173,12 +175,13 @@ public class CatagoryViewFragment extends Fragment {
                             jsonObject1 = jsonArray1.optJSONObject(j);
                             mrp.setText("₹ " + jsonObject1.optString("mrp_price"));
                             mrp.setPaintFlags(mrp.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                            size.setText(jsonObject1.optString("size"));
+//                            size.setText(jsonObject1.optString("size"));
                             disount.setText(jsonObject1.optString("discount") + " OFF");
                             selling.setText(jsonObject1.optString("sell_price"));
                         }
                         //  DataList.add(new Getseter(jsonObject.optString("product_id"),jsonObject.optString("product_name"),jsonObject.optString("product_image"),null));
 
+//                        name.setText(jsonObject.optString("product_name") + " (" + jsonObject1.optString("size") + ")");
                         name.setText(jsonObject.optString("product_name"));
 
 //                        desc.setText(jsonObject.optString("description"));
@@ -204,7 +207,14 @@ public class CatagoryViewFragment extends Fragment {
         btnNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callApiForEnquiry();
+
+                if(Integer.parseInt(integer_number.getText().toString()) > 0){
+                    callApiForEnquiry();
+
+                }else{
+                    Toast.makeText(getActivity(), "Please fill Quantity!", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
@@ -212,58 +222,61 @@ public class CatagoryViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
-                if (MyPrefrences.getUserLogin(getActivity())==false){
-                    popForLogin();
-
-                }else {
-                    if (!Getseter.preferences.getString("fname", "").toString().equals("") &&
-                            //   !Getseter.preferences.getString("lname","").toString().equals("") &&
-                            !Getseter.preferences.getString("house_no", "").toString().equals("") &&
-                            !Getseter.preferences.getString("street", "").toString().equals("") &&
-                            // !Getseter.preferences.getString("area","").toString().equals("") &&
-                            !Getseter.preferences.getString("pincode", "").toString().equals("") &&
-                            !Getseter.preferences.getString("city_name", "").toString().equals("") &&
-                            !Getseter.preferences.getString("mobile", "").toString().equals("")) {
-
-                        if (Getseter.preferences.getString("pincode", "").equals("141001") ||
-                                Getseter.preferences.getString("pincode", "").equals("141002") ||
-                                Getseter.preferences.getString("pincode", "").equals("141003") ||
-                                Getseter.preferences.getString("pincode", "").equals("141004") ||
-                                Getseter.preferences.getString("pincode", "").equals("141005") ||
-                                Getseter.preferences.getString("pincode", "").equals("141006") ||
-                                Getseter.preferences.getString("pincode", "").equals("141007") ||
-                                Getseter.preferences.getString("pincode", "").equals("141008")) {
-
-
-                            continueCart();
-
-                        } else {
-
-                            if (jsonObject.optString("product_name").contains("Dry") || jsonObject.optString("product_name").contains("Giftpack")) {
-                                Toast.makeText(getActivity(), "Sorry! this product not available on this pincode.", Toast.LENGTH_LONG).show();
-                            } else {
-                                continueCart();
-                            }
-                        }
-
-
-                    } else {
-                        Fragment fragment = new ViewProfile();
-                        FragmentManager manager = getFragmentManager();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("type", "none");
-                        bundle.putString("orderitem", "");
-                        bundle.putString("cal_price", "");
-                        bundle.putString("totalItem", "");
-                        bundle.putInt("length", 0);
-                        FragmentTransaction ft = manager.beginTransaction();
-                        fragment.setArguments(bundle);
-                        ft.setCustomAnimations(R.anim.frag_fadein, R.anim.frag_fadeout, R.anim.frag_fade_right, R.anim.frag_fad_left);
-                        ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
-
+                   if(Integer.parseInt(integer_number.getText().toString()) > 0){
+//                        popForLogin();
+                       continueCart();
+                    }else{
+                        Toast.makeText(getActivity(), "Please fill Quantity!", Toast.LENGTH_LONG).show();
                     }
-                }
+
+//                    continueCart();
+
+//                    if (!Getseter.preferences.getString("fname", "").toString().equals("") &&
+//                            //   !Getseter.preferences.getString("lname","").toString().equals("") &&
+//                            !Getseter.preferences.getString("house_no", "").toString().equals("") &&
+//                            !Getseter.preferences.getString("street", "").toString().equals("") &&
+//                            // !Getseter.preferences.getString("area","").toString().equals("") &&
+//                            !Getseter.preferences.getString("pincode", "").toString().equals("") &&
+//                            !Getseter.preferences.getString("city_name", "").toString().equals("") &&
+//                            !Getseter.preferences.getString("mobile", "").toString().equals("")) {
+//
+//                        if (Getseter.preferences.getString("pincode", "").equals("141001") ||
+//                                Getseter.preferences.getString("pincode", "").equals("141002") ||
+//                                Getseter.preferences.getString("pincode", "").equals("141003") ||
+//                                Getseter.preferences.getString("pincode", "").equals("141004") ||
+//                                Getseter.preferences.getString("pincode", "").equals("141005") ||
+//                                Getseter.preferences.getString("pincode", "").equals("141006") ||
+//                                Getseter.preferences.getString("pincode", "").equals("141007") ||
+//                                Getseter.preferences.getString("pincode", "").equals("141008")) {
+//
+//
+//                            continueCart();
+//
+//                        } else {
+//
+//                            if (jsonObject.optString("product_name").contains("Dry") || jsonObject.optString("product_name").contains("Giftpack")) {
+//                                Toast.makeText(getActivity(), "Sorry! this product not available on this pincode.", Toast.LENGTH_LONG).show();
+//                            } else {
+//                                continueCart();
+//                            }
+//                        }
+//
+//
+//                    } else {
+//                        Fragment fragment = new ViewProfile();
+//                        FragmentManager manager = getFragmentManager();
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("type", "none");
+//                        bundle.putString("orderitem", "");
+//                        bundle.putString("cal_price", "");
+//                        bundle.putString("totalItem", "");
+//                        bundle.putInt("length", 0);
+//                        FragmentTransaction ft = manager.beginTransaction();
+//                        fragment.setArguments(bundle);
+//                        ft.setCustomAnimations(R.anim.frag_fadein, R.anim.frag_fadeout, R.anim.frag_fade_right, R.anim.frag_fad_left);
+//                        ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+//
+//                    }
             }
         });
 
@@ -274,13 +287,13 @@ public class CatagoryViewFragment extends Fragment {
     private void callApiForEnquiry() {
         Getseter.showdialog(dialog);
 
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, Api.Enquiry, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Api.Enquiry, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Getseter.exitdialog(dialog);
 
                 JSONObject jsonObject;
-                Log.d("Okhttp","Enquiry"+response);
+                Log.d("Okhttp", "Enquiry" + response);
 
                 try {
                     jsonObject = new JSONObject(response);
@@ -290,8 +303,7 @@ public class CatagoryViewFragment extends Fragment {
                         Getseter.exitdialog(dialog);
                         Toast.makeText(getActivity(), jsonObject.optString("message").toString(), Toast.LENGTH_LONG).show();
 
-                    }
-                    else {
+                    } else {
                         Getseter.exitdialog(dialog);
                         Toast.makeText(getActivity(), jsonObject.optString("message").toString(), Toast.LENGTH_LONG).show();
 
@@ -302,7 +314,6 @@ public class CatagoryViewFragment extends Fragment {
                 }
 
 
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -311,14 +322,14 @@ public class CatagoryViewFragment extends Fragment {
                 Getseter.exitdialog(dialog);
 
             }
-        }){
+        }) {
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
 
                 //  params.put("change_pass", "1");
-                params.put("user_id", Getseter.preferences.getString("user_id",""));
+                params.put("user_id", Getseter.preferences.getString("user_id", ""));
                 params.put("product_id", productId);
                 params.put("product_qty", integer_number.getText().toString());
                 params.put("message", "");
@@ -369,10 +380,10 @@ public class CatagoryViewFragment extends Fragment {
                 .setPositiveButton("Login", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        Intent intent=new Intent(getActivity(), Login.class);
+                        Intent intent = new Intent(getActivity(), Login.class);
                         startActivity(intent);
-                        getActivity(). overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                        getActivity(). finish();
+                        getActivity().overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                        getActivity().finish();
                     }
                 })
                 .setNegativeButton("Not Now", new DialogInterface.OnClickListener() {
@@ -381,12 +392,11 @@ public class CatagoryViewFragment extends Fragment {
                         dialog.cancel();
 
 
-
                     }
                 });
         AlertDialog alert = builder.create();
         //Setting the title manually
-        alert.setTitle(""+MyPrefrences.getUSENAME(getActivity()));
+        alert.setTitle("" + MyPrefrences.getUSENAME(getActivity()));
         alert.show();
     }
 
@@ -400,7 +410,7 @@ public class CatagoryViewFragment extends Fragment {
 //          ImageView fact_image = (ImageView) dialog.findViewById(R.id.fact_image);
 
 
-        Log.d("fgdfgdfghsg",url);
+        Log.d("fgdfgdfghsg", url);
 
         ZoomageView networkImageView = (ZoomageView) dialog.findViewById(R.id.networkImageView);
 
@@ -417,8 +427,6 @@ public class CatagoryViewFragment extends Fragment {
         });
         dialog.show();
     }
-
-
 
 
 }

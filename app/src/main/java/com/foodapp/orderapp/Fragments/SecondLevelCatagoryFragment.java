@@ -82,7 +82,7 @@ public class SecondLevelCatagoryFragment extends Fragment {
         dialog.setCancelable(false);
         Getseter.showdialog(dialog);
         adapter = new Adapter();
-        getActivity().setTitle("Product Listing");
+        getActivity().setTitle(""+getArguments().getString("name"));
 
         if (getArguments().getString("type").equalsIgnoreCase("search")) {
 
@@ -230,6 +230,7 @@ public class SecondLevelCatagoryFragment extends Fragment {
 //                position=position-1;
                     bundle.putString("cat_id", DataList.get(position).getID().toString());
                     bundle.putString("type", "normal");
+                    bundle.putString("name",""+DataList.get(position).getName());
                     bundle.putString("query", "");
                     Log.d("fsdgfsdgdf", DataList.get(position).getID().toString());
                     Log.d("fsdgfsdgdf", String.valueOf(position));
@@ -240,7 +241,7 @@ public class SecondLevelCatagoryFragment extends Fragment {
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
             name.setText(DataList.get(position).getName().toString());
-            image.setImageUrl(DataList.get(position).getDesc().toLowerCase(),imageLoader);
+            image.setImageUrl(DataList.get(position).getCount(),imageLoader);
 
             return convertView;
         }

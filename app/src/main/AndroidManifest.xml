@@ -51,6 +51,15 @@
             android:label="@string/title_activity_navigation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+        <activity android:name=".Fragments.CartFragment"
+            android:label="Cart"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".Fragments.Delivery"
+            android:label="Payment"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
         <!--<activity-->
             <!--android:name="com.foodapp.murti.Activity.ForgotPassword"-->
             <!--android:screenOrientation="portrait" />-->

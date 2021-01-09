@@ -28,6 +28,7 @@ public class MyPrefrences  {
     static SharedPreferences DateTime;
     static SharedPreferences ReferCode;
     static SharedPreferences MyReferCode;
+    static SharedPreferences gst;
     public static SharedPreferences mySharedPreferencesToken;
     public static SharedPreferences PAYMENTID;
 
@@ -61,6 +62,7 @@ public class MyPrefrences  {
         setEMAILID(context, "");
         setMobile(context, "");
         setImage(context, "");
+        setGST(context,"");
         //   setCityID(context, "");
         //  setCityName(context, "");
         setRefer(context, "");
@@ -393,6 +395,18 @@ public class MyPrefrences  {
     public static String getMyRefrel(Context context) {
         MyReferCode = PreferenceManager.getDefaultSharedPreferences(context);
         return MyReferCode.getString("MYREFERCODE","");
+    }
+
+    public static void setGST(Context context, String is) {
+        gst = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = gst.edit();
+        editor.putString("GST", is);
+        editor.commit();
+    }
+
+    public static String getGST(Context context) {
+        gst = PreferenceManager.getDefaultSharedPreferences(context);
+        return gst.getString("GST","");
     }
 
 

@@ -274,6 +274,7 @@ public class HomeFagment extends Fragment  {
 //                position=position-1;
                 bundle.putString("cat_id",DataList.get(position).getID().toString());
                 bundle.putString("type","normal");
+                bundle.putString("name",""+DataList.get(position).getName());
                 bundle.putString("query","");
                 Log.d("fsdgfsdgdf",DataList.get(position).getID().toString());
                 Log.d("fsdgfsdgdf", String.valueOf(position));

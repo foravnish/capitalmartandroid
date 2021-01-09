@@ -221,12 +221,9 @@ public class Navigation extends AppCompatActivity
 //                mCounter.setText("+"+Integer.toString(count));
 //            }
 
-            fragment=new CartFragment();
-            FragmentManager fm=getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-             ft.setCustomAnimations(R.anim.frag_fadein, R.anim.frag_fadeout,R.anim.frag_fade_right, R.anim.frag_fad_left);
-            ft.replace(R.id.content_frame, fragment).addToBackStack(null);
-            ft.commit();
+            Intent intent = new Intent(getApplicationContext(), CartFragment.class);
+            startActivity(intent);
+
 
 
             return true;

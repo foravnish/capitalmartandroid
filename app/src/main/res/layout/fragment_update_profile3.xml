@@ -8,20 +8,6 @@
     xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical">
 
-        <!--        <androidx.appcompat.widget.Toolbar-->
-        <!--            android:id="@+id/toolbar"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="?attr/actionBarSize"-->
-        <!--            android:background="@color/white_color"-->
-        <!--            android:elevation="1dp"-->
-        <!--            android:fitsSystemWindows="true"-->
-        <!--            app:title="Profile"-->
-        <!--            app:titleMarginStart="30dp"-->
-        <!--            app:titleTextColor="@android:color/black" >-->
-
-
-        <!--        </androidx.appcompat.widget.Toolbar>-->
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -238,6 +224,16 @@
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/mobileNo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="10dp"
+                            android:text=""
+                            android:textColor="@color/gray_dark"
+                            android:textSize="18sp" />
+
+                        <TextView
                             android:id="@+id/addresses"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -257,15 +253,6 @@
                             android:textColor="@color/gray_dark"
                             android:textSize="18sp" />
 
-                        <TextView
-                            android:id="@+id/mobileNo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="10dp"
-                            android:text=""
-                            android:textColor="@color/gray_dark"
-                            android:textSize="18sp" />
 
                     </LinearLayout>
                     <View

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CartFragment extends Fragment {
+public class CartFragment extends AppCompatActivity {
 
     Fragment fragment;
     GridView gridview;
@@ -54,33 +55,37 @@ public class CartFragment extends Fragment {
     ImageView remove;
     double total;
     int totalItem;
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_cart, container, false);
 
-        db = new DatabaseHandler(getActivity());
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_cart);
+
+        db = new DatabaseHandler(getApplicationContext());
         DataList=db.getAllCatagory();
 
-        gridview=(GridView)view.findViewById(R.id.gridview);
-        checkout=(Button) view.findViewById(R.id.checkout);
-        remove=(ImageView) view.findViewById(R.id.remove);
+        gridview=(GridView)findViewById(R.id.gridview);
+        checkout=(Button)findViewById(R.id.checkout);
+        remove=(ImageView)findViewById(R.id.remove);
 
-        dialog=new Dialog(getActivity());
+        dialog=new Dialog(getApplicationContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         adapter=new Adapter();
 
-        getActivity().setTitle("Cart");
+        setTitle("Cart");
 
 
-       // Toast.makeText(getActivity(), DataList.size()+"", Toast.LENGTH_SHORT).show();
+
+        // Toast.makeText(getActivity(), DataList.size()+"", Toast.LENGTH_SHORT).show();
 
         if (DataList.size()==0){
             checkout.setVisibility(View.GONE);
-            Toast.makeText(getActivity(), "Your Cart is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Your Cart is empty", Toast.LENGTH_SHORT).show();
         }
         else{
             checkout.setVisibility(View.VISIBLE);
@@ -95,32 +100,40 @@ public class CartFragment extends Fragment {
             public void onClick(View v) {
                 db.deleteCatogory();
                 Navigation.textOne.setText("0");
-                Fragment fragment=new CartFragment();
-                FragmentManager manager=getFragmentManager();
-                FragmentTransaction ft=manager.beginTransaction();
-                ft.setCustomAnimations(R.anim.frag_fadein, R.anim.frag_fadeout,R.anim.frag_fade_right, R.anim.frag_fad_left);
-                ft.replace(R.id.content_frame,fragment).addToBackStack(null).commit();
+                Intent intent = new Intent(getApplicationContext(), CartFragment.class);
+                startActivity(intent);
+                finish();
+
             }
         });
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (MyPrefrences.getUserLogin(getActivity())==false){
+                if (MyPrefrences.getUserLogin(getApplicationContext())==false){
                     popForLogin();
                 }
                 else {
-                    Fragment fragment = new Delivery();
-                    FragmentManager manager = getFragmentManager();
-                    FragmentTransaction ft = manager.beginTransaction();
-                    ft.setCustomAnimations(R.anim.frag_fadein, R.anim.frag_fadeout, R.anim.frag_fade_right, R.anim.frag_fad_left);
-                    ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("orderitem", String.valueOf(DataList.size()));
-                    bundle.putString("cal_price", String.valueOf(total));
-                    bundle.putString("totalItem", String.valueOf(totalItem));
-                    bundle.putInt("length", DataList.size());
-                    fragment.setArguments(bundle);
+
+                    Intent intent = new Intent(getApplicationContext(), Delivery.class);
+                    intent.putExtra("orderitem", String.valueOf(DataList.size()));
+                    intent.putExtra("cal_price", String.valueOf(total));
+                    intent.putExtra("totalItem", String.valueOf(totalItem));
+                    intent.putExtra("length",""+ DataList.size());
+                    startActivity(intent);
+
+
+//                    Fragment fragment = new Delivery();
+//                    FragmentManager manager = getFragmentManager();
+//                    FragmentTransaction ft = manager.beginTransaction();
+//                    ft.setCustomAnimations(R.anim.frag_fadein, R.anim.frag_fadeout, R.anim.frag_fade_right, R.anim.frag_fad_left);
+//                    ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("orderitem", String.valueOf(DataList.size()));
+//                    bundle.putString("cal_price", String.valueOf(total));
+//                    bundle.putString("totalItem", String.valueOf(totalItem));
+//                    bundle.putInt("length", DataList.size());
+//                    fragment.setArguments(bundle);
                 }
             }
         });
@@ -131,33 +144,31 @@ public class CartFragment extends Fragment {
 
                 Log.d("gdfgdfgdfgdfgd",DataList.get(i).getProductId().toString());
 
-                Fragment fragment=new CatagoryViewFragment();
-                FragmentManager manager=getFragmentManager();
-                FragmentTransaction ft=manager.beginTransaction();
-                ft.replace(R.id.content_frame,fragment).addToBackStack(null).commit();
-                Bundle bundle=new Bundle();
-                bundle.putString("product_id",DataList.get(i).getProductId().toString());
-                //bundle.putString("product_image",DataList.get(position).getDesc().toString());
-                fragment.setArguments(bundle);
+//                Fragment fragment=new CatagoryViewFragment();
+//                FragmentManager manager=getFragmentManager();
+//                FragmentTransaction ft=manager.beginTransaction();
+//                ft.replace(R.id.content_frame,fragment).addToBackStack(null).commit();
+//                Bundle bundle=new Bundle();
+//                bundle.putString("product_id",DataList.get(i).getProductId().toString());
+//                //bundle.putString("product_image",DataList.get(position).getDesc().toString());
+//                fragment.setArguments(bundle);
             }
         });
-
-        return  view;
 
 
     }
 
     private void popForLogin() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
         builder.setMessage("Please Login to Checkout")
                 .setCancelable(false)
                 .setPositiveButton("Login", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        Intent intent=new Intent(getActivity(),Login.class);
+                        Intent intent=new Intent(getApplicationContext(),Login.class);
                         startActivity(intent);
-                        getActivity(). overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                        getActivity(). finish();
+                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                        finish();
                     }
                 })
                 .setNegativeButton("Not Now", new DialogInterface.OnClickListener() {
@@ -171,7 +182,7 @@ public class CartFragment extends Fragment {
                 });
         AlertDialog alert = builder.create();
         //Setting the title manually
-        alert.setTitle(""+MyPrefrences.getUSENAME(getActivity()));
+        alert.setTitle(""+MyPrefrences.getUSENAME(getApplicationContext()));
         alert.show();
     }
 
@@ -183,7 +194,7 @@ public class CartFragment extends Fragment {
         int bal;
         int np1;
         Adapter(){
-            inflater=(LayoutInflater)getActivity().getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            inflater=(LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             if (inflater == null) {
                 throw new AssertionError("LayoutInflater not found.");
             }
@@ -233,16 +244,22 @@ public class CartFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     db.removeSingleContact(new Getseter(DataList.get(position).getTime().toString(),null,null,null));
-                    fragment=new CartFragment();
-                    FragmentManager fm=getFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
-                    ft.setCustomAnimations(R.anim.frag_fadein, R.anim.frag_fadeout,R.anim.frag_fade_right, R.anim.frag_fad_left);
-                    ft.replace(R.id.content_frame, fragment).addToBackStack(null);
-                    ft.commit();
-                    //DataList1=db.getAllCatagory();
+
+                    Intent intent = new Intent(getApplicationContext(), CartFragment.class);
+                    startActivity(intent);
+                    finish();
+//                    fragment=new CartFragment();
+//                    FragmentManager fm=getFragmentManager();
+//                    FragmentTransaction ft = fm.beginTransaction();
+//                    ft.setCustomAnimations(R.anim.frag_fadein, R.anim.frag_fadeout,R.anim.frag_fade_right, R.anim.frag_fad_left);
+////                    ft.remove(fragment);
+//                    ft.replace(R.id.content_frame, fragment).addToBackStack(null);
+//                    ft.commit();
+
                     int num=Integer.valueOf(Navigation.textOne.getText().toString());
                     num=num-1;
                     Navigation.textOne.setText(num+"");
+
 
                 }
             });

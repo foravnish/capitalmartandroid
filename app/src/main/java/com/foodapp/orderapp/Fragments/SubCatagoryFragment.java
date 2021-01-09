@@ -82,7 +82,7 @@ public class SubCatagoryFragment extends Fragment {
         dialog.setCancelable(false);
         Getseter.showdialog(dialog);
         adapter=new Adapter();
-        getActivity().setTitle("Product Listing");
+        getActivity().setTitle(""+getArguments().getString("name"));
 
 
         if (getArguments().getString("type").equalsIgnoreCase("search")){
