@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold"
-                    android:text="Shipping Amount:"
+                    android:text="Order Status:"
                     android:singleLine="true"
                     android:layout_gravity="left"
                     android:gravity="left"/>

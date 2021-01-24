@@ -63,7 +63,7 @@ public class MyPrefrences  {
         setMobile(context, "");
         setImage(context, "");
         setGST(context,"");
-        //   setCityID(context, "");
+           setCityID(context, "");
         //  setCityName(context, "");
         setRefer(context, "");
         setMyRefrel(context, "");

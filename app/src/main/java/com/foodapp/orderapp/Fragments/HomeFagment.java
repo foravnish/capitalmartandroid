@@ -227,7 +227,7 @@ public class HomeFagment extends Fragment  {
 
 
 
-        JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, Api.mainCategoryList, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, Api.mainCategoryList+"?user_id="+MyPrefrences.getUserID(getActivity()), null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -248,6 +248,9 @@ public class HomeFagment extends Fragment  {
 
                         gridview.setAdapter(adapter);
                     }
+                }else {
+                    Toast.makeText(getActivity(), ""+response.optString("message"), Toast.LENGTH_SHORT).show();
+
                 }
 
 

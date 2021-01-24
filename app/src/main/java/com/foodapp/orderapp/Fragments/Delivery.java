@@ -328,38 +328,19 @@ public class Delivery extends AppCompatActivity {
                         params.put("amount", subtotal.getText().toString());
                         params.put("discount", "0");
                         params.put("total_amount", subtotal.getText().toString());
-                        params.put("ship_fname", Getseter.preferences.getString("fname", ""));
-                        params.put("ship_lname", Getseter.preferences.getString("lname", ""));
-                        params.put("ship_email", Getseter.preferences.getString("emailid", ""));
-                        params.put("ship_house_no", Getseter.preferences.getString("house_no", ""));
-                        params.put("ship_street", Getseter.preferences.getString("street", ""));
-                        params.put("ship_landmark", Getseter.preferences.getString("landmark", ""));
-                        params.put("ship_pincode", Getseter.preferences.getString("pincode", ""));
-                        params.put("ship_area", Getseter.preferences.getString("area", ""));
-                        params.put("ship_city_id", Getseter.preferences.getString("city_id", ""));
-                        params.put("ship_mobile", Getseter.preferences.getString("mobile", ""));
+                        params.put("ship_fname", MyPrefrences.getUSENAME(getApplicationContext()));
+                        params.put("ship_lname", "");
+                        params.put("ship_email", MyPrefrences.getEMAILID(getApplicationContext()));
+                        params.put("ship_house_no", "");
+                        params.put("ship_street", "");
+                        params.put("ship_landmark", "");
+                        params.put("ship_pincode", "");
+                        params.put("ship_area", "");
+                        params.put("ship_city_id", MyPrefrences.getCityID(getApplicationContext()));
+                        params.put("ship_mobile", MyPrefrences.getMobile(getApplicationContext()));
                         params.put("expres_amt", total.getText().toString());
                         params.put("shipping_amount", delCharge.toString());
                         params.put("mode", "COD");
-
-
-                        Log.d("user_id", Getseter.preferences.getString("user_id", ""));
-                        Log.d("amount", subtotal.getText().toString());
-                        Log.d("discount", "0");
-                        Log.d("total_amount", subtotal.getText().toString());
-                        Log.d("ship_fname", Getseter.preferences.getString("fname", ""));
-                        Log.d("ship_lname", Getseter.preferences.getString("lname", ""));
-                        Log.d("ship_email", Getseter.preferences.getString("emailid", ""));
-                        Log.d("ship_house_no", Getseter.preferences.getString("house_no", ""));
-                        Log.d("ship_street", Getseter.preferences.getString("street", ""));
-                        Log.d("ship_landmark", Getseter.preferences.getString("landmark", ""));
-                        Log.d("ship_pincode", Getseter.preferences.getString("pincode", ""));
-                        Log.d("ship_area", Getseter.preferences.getString("area", ""));
-                        Log.d("ship_city_id", Getseter.preferences.getString("city_id", ""));
-                        Log.d("ship_mobile", Getseter.preferences.getString("mobile", ""));
-                        Log.d("expres_amt", total.getText().toString());
-                        Log.d("shipping_amount", delCharge.toString());
-
 
                         //  JSONObject dataObj = new JSONObject();
                         JSONArray cartItemsArray = null;

@@ -211,13 +211,16 @@ public class Login extends AppCompatActivity  {
                             Getseter.editor.putString("user_id", jsonObject1.optString("id"));
                             Getseter.editor.putString("uname", jsonObject1.optString("fname"));
 //                            Getseter.editor.putString("emailid", jsonObject1.optString("email"));
+                            MyPrefrences.setUserID(getApplicationContext(),jsonObject1.optString("id"));
+
                             MyPrefrences.setUSENAME(getApplicationContext(),jsonObject1.optString("fname"));
                             MyPrefrences.setEMAILID(getApplicationContext(),jsonObject1.optString("email"));
                             MyPrefrences.setMobile(getApplicationContext(),jsonObject1.optString("mobile"));
                             MyPrefrences.setMyRefrel(getApplicationContext(),jsonObject1.optString("referer"));
                             MyPrefrences.setGST(getApplicationContext(),jsonObject1.optString("gst"));
                             MyPrefrences.setCompanyName(getApplicationContext(),jsonObject1.optString("company"));
-                            MyPrefrences.setCityName(getApplicationContext(),jsonObject1.optString("city_id"));
+                            MyPrefrences.setCityName(getApplicationContext(),jsonObject1.optString("city_name"));
+                            MyPrefrences.setCityID(getApplicationContext(),jsonObject1.optString("city_id"));
 
                             Getseter.editor.commit();
                         }

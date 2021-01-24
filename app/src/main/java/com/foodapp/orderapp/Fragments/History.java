@@ -64,15 +64,16 @@ public class History extends Fragment {
 //
         getActivity().setTitle("History");
 
-//        JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, "http://hoomiehome.com/appcredentials/jsondata.php?order_history=1&user_id="+Getseter.preferences.getString("user_id",""), null, new Response.Listener<JSONObject>() {
         JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, Api.orderHistory+"?userId="+Getseter.preferences.getString("user_id",""), null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
+                Log.d("okhttp","History:"+response);
                 DataList.clear();
                 Getseter.exitdialog(dialog);
 
-                Log.d("fdssddgfd",Getseter.preferences.getString("user_id",""));
+
+                Log.d("preferences_userid",Getseter.preferences.getString("user_id",""));
 
 
                 if (response.optString("status").equals("failure")){
@@ -85,7 +86,7 @@ public class History extends Fragment {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.optJSONObject(i);
 
-                            DataList.add(new Getseter(jsonObject.optString("order_date"), jsonObject.optString("id"), jsonObject.optString("shipping_amount"), jsonObject.optString("total_amount"), jsonObject.optString("payment_method"), jsonObject.optString("order_status"), null,null,null));
+                            DataList.add(new Getseter(jsonObject.optString("order_date"), jsonObject.optString("id"), jsonObject.optString("order_status"), jsonObject.optString("total_amount"), jsonObject.optString("payment_method"), jsonObject.optString("order_status"), null,null,null));
 
                             gridview.setAdapter(adapter);
                         }
@@ -162,7 +163,7 @@ public class History extends Fragment {
 
 
             date.setText(DataList.get(position).getID().toString());
-            shipping.setText("₹ "+DataList.get(position).getDesc().toString());
+            shipping.setText(""+DataList.get(position).getDesc().toString());
             amount.setText("₹ "+DataList.get(position).getCount().toString());
             method.setText(DataList.get(position).getImg().toString());
             status.setText(DataList.get(position).getCdate().toString());

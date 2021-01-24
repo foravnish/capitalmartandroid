@@ -124,10 +124,22 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/size"
                     android:layout_marginTop="@dimen/dp10"
-                    android:textSize="@dimen/text_size_18sp"
+                    android:textSize="@dimen/dimen_16sp"
                     android:textColor="@color/red_full"
                     android:textStyle="bold"
-                    android:text="Buy Bulk Save More" />
+                    android:text="For Bulk Buy Press Enquiry Button Or Call 9855700377" />
+
+                <TextView
+                    android:id="@+id/txtIsInStock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/size"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:textColor="@color/red_full"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:text="Out of Stock" />
 
                 <TextView
                     android:id="@+id/desc"
@@ -150,7 +162,7 @@
                     <LinearLayout
                         android:id="@+id/liner"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dp60"
                         android:layout_above="@+id/button1"
                         android:background="@drawable/strock_qty"
                         android:layout_gravity="center"
@@ -180,7 +192,7 @@
                             android:gravity="center"
                             android:inputType="number"
                             android:text="0"
-                            android:textSize="30sp"
+                            android:textSize="@dimen/dimen_20sp"
                             android:textStyle="normal" />
 
                         <Button

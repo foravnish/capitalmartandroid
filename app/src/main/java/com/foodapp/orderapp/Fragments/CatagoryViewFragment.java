@@ -77,6 +77,8 @@ public class CatagoryViewFragment extends Fragment {
     List<Getseter> Catag = new ArrayList<Getseter>();
     boolean flag = false;
     String productId;
+    TextView txtIsInStock;
+    Boolean flagInStock=false;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
@@ -86,6 +88,7 @@ public class CatagoryViewFragment extends Fragment {
         parallax_header_imageview = (NetworkImageView) view.findViewById(R.id.parallax_header_imageview);
 
         productId = getArguments().getString("product_id");
+        txtIsInStock = (TextView) view.findViewById(R.id.txtIsInStock);
 
         mrp = (TextView) view.findViewById(R.id.mrp);
         disount = (TextView) view.findViewById(R.id.disount);
@@ -172,7 +175,16 @@ public class CatagoryViewFragment extends Fragment {
 
                         JSONArray jsonArray1 = jsonObject.optJSONArray("sizes");
                         for (int j = 0; j < jsonArray1.length(); j++) {
+
                             jsonObject1 = jsonArray1.optJSONObject(j);
+                            if (jsonObject1.optString("in_stock").equals("0")){
+                                flagInStock=false;
+                                txtIsInStock.setVisibility(View.VISIBLE);
+                            }else{
+                                flagInStock=true;
+                                txtIsInStock.setVisibility(View.GONE);
+
+                            }
                             mrp.setText("₹ " + jsonObject1.optString("mrp_price"));
                             mrp.setPaintFlags(mrp.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 //                            size.setText(jsonObject1.optString("size"));
@@ -208,11 +220,16 @@ public class CatagoryViewFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if(Integer.parseInt(integer_number.getText().toString()) > 0){
-                    callApiForEnquiry();
+                if (flagInStock) {
+                    if (Integer.parseInt(integer_number.getText().toString()) > 0) {
+                        callApiForEnquiry();
 
+                    } else {
+                        Toast.makeText(getActivity(), "Please fill Quantity!", Toast.LENGTH_LONG).show();
+                    }
                 }else{
-                    Toast.makeText(getActivity(), "Please fill Quantity!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "The Product has been Out of Stock", Toast.LENGTH_LONG).show();
+
                 }
 
             }
@@ -221,13 +238,16 @@ public class CatagoryViewFragment extends Fragment {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                   if(Integer.parseInt(integer_number.getText().toString()) > 0){
+                if (flagInStock) {
+                    if (Integer.parseInt(integer_number.getText().toString()) > 0) {
 //                        popForLogin();
-                       continueCart();
-                    }else{
+                        continueCart();
+                    } else {
                         Toast.makeText(getActivity(), "Please fill Quantity!", Toast.LENGTH_LONG).show();
                     }
+                }else{
+                    Toast.makeText(getActivity(), "The Product has been Out of Stock", Toast.LENGTH_LONG).show();
+                }
 
 //                    continueCart();
 
